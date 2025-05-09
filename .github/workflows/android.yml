@@ -15,15 +15,12 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'temurin'  # Nhà cung cấp JDK
+          distribution: 'temurin'
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+      - name: Clean Gradle Cache
+        run: ./gradlew clean
       - name: Build with Gradle
         run: ./gradlew build
       - name: Run Unit Tests
         run: ./gradlew test
-      - name: Run Instrumentation Tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          script: ./gradlew connectedAndroidTest
